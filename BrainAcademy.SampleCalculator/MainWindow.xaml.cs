@@ -16,22 +16,22 @@ namespace BrainAcademy.SampleCalculator
 
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
-            // обработчик работает только для кнопок
+            
             Button btn = e.Source as Button;
             if (btn == null)
                 return;
-            // обработчик работает только для кнопок у которых есть значение (контент)
+            // Event handler work only for button with content
             string value = btn.Content.ToString();
             if (String.IsNullOrEmpty(value))
                 return; //pisos
             switch(value)
             {
-                // стираем текстовое поле
+                // delete TextBoxMain.Text
                 case "C":
                     TextBoxMain.Text = "0";
                     break;
 
-                // считаем выражение с помощью библиотеки NCalc
+                // counting value with this library 
                 // https://ncalc.codeplex.com/
                 case "=":
                     try
@@ -45,7 +45,7 @@ namespace BrainAcademy.SampleCalculator
                     }
                     break;
                 
-                // добавялем новое значение в текстовое поле и удаляем стартовый 0
+                // add new value to TextBoxMain
                 default:
                     TextBoxMain.Text = TextBoxMain.Text.TrimStart('0') + value;                    
                     break;
@@ -53,6 +53,17 @@ namespace BrainAcademy.SampleCalculator
             
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Delete last symbol in TextBoxMain
+            if (TextBoxMain.Text.Length>1)
+            {
+                TextBoxMain.Text = TextBoxMain.Text.Remove(TextBoxMain.Text.Length - 1);
+            }
+            else
+            {
+                TextBoxMain.Text = "0";
+            }
+        }
     }
 }
